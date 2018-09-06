@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  php:
+    image: oneguard/symfony-dev:latest
+    volumes:
+      - "./:/usr/src/app/"
+    ports:
+      - "8000:8000"
