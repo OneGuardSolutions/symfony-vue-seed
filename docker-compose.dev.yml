@@ -1,12 +1,13 @@
 version: "3.7"
 
 services:
+
   nginx:
     image: nginx:alpine
     volumes:
-      - "./:/var/www/html/"
-      - "./docker/dev/nginx/default.conf:/etc/nginx/conf.d/default.conf"
-      - "./var/log/nginx/:/var/log/dev/nginx"
+      - "./public:/var/www/html/public:ro"
+      - "./docker/dev/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro"
+      - "./var/log/dev/nginx/:/var/log/nginx"
     ports:
       - "8000:80"
     networks:
@@ -15,14 +16,20 @@ services:
   php:
     image: oneguard/php:7.2-fpm-xdebug
     volumes:
-      - "./:/usr/src/app/"
+      - "./:/var/www/html/:ro"
+      - "./var/:/var/www/html/var/"
+    env_file: .env
     networks:
       - backend
 
   assets:
     image: node:alpine
     volumes:
-      - "./:/usr/src/app/"
+      - "./:/var/www/html/"
+    working_dir: /var/www/html/
+    command: sh -c "yarn install && yarn dev-server --host=0.0.0.0 --port=8001 --disable-host-check"
+    networks:
+      - backend
 
 networks:
   backend:

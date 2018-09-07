@@ -19,10 +19,5 @@ services:
     networks:
       - backend
 
-  hmr:
-    image: oneguard/webpack-encore-dev:hrm
-    volumes:
-      - ./:/var/www/html/"
-
 networks:
   backend:
