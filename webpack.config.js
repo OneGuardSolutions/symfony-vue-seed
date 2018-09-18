@@ -1,4 +1,5 @@
 var Encore = require('@symfony/webpack-encore');
+const path = require('path');
 
 Encore
     // directory where compiled assets will be stored
@@ -17,7 +18,11 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
-    .addEntry('app', './assets/js/app.js')
+    .createSharedEntry('vendor', [
+        'vue',
+        'vue-router'
+    ])
+    .addEntry('app', './assets/js/main.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
@@ -37,14 +42,16 @@ Encore
     // enables Sass/SCSS support
     //.enableSassLoader()
 
-    // Enable Vue loader
     .enableVueLoader()
-
-    // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
+
+    .addAliases({
+      '@': path.resolve(__dirname, './assets/js')
+    })
 ;
 
-module.exports = Encore.getWebpackConfig();
+let config = Encore.getWebpackConfig();
+
+module.exports = config;
