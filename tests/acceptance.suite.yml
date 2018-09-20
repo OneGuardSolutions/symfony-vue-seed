@@ -8,5 +8,11 @@ actor: AcceptanceTester
 modules:
     enabled:
         - PhpBrowser:
-            url: http://localhost:8000
+            url: http://localhost:8888
         - \App\Tests\Helper\Acceptance
+
+#extensions:
+#    enabled:
+#        - Codeception\Extension\RunProcess:
+#            0: php -S 127.0.0.1:8888 public/index.php
+#            sleep: 1

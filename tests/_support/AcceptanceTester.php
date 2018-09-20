@@ -23,4 +23,18 @@ class AcceptanceTester extends \Codeception\Actor
    /**
     * Define custom actions here
     */
+
+    /**
+     * @Given I am on :path page
+     */
+    public function iAmOnPage($path) {
+        $this->amOnPage($path);
+    }
+
+    /**
+     * @Then I see page is loaded
+     */
+    public function iSeePageIsLoaded() {
+        $this->canSeeElement("title");
+    }
 }
