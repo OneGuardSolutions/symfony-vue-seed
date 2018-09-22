@@ -8,8 +8,7 @@ class DefaultController extends Controller {
     /**
      * @Route("/", name="default")
      */
-    public function index()
-    {
+    public function index() {
         return $this->render('index.html.php');
     }
 }
