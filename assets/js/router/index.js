@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 import Homepage from '@/components/Homepage'
 
-Vue.use(Router);
+Vue.use(Router)
 
 const router = new Router({
   routes: [
@@ -13,6 +13,6 @@ const router = new Router({
       component: Homepage
     }
   ]
-});
+})
 
 export default router
